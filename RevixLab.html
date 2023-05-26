@@ -66,6 +66,28 @@
       padding: 20px;
       text-align: center;
     }
+    .search-bar {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .search-input {
+      padding: 5px;
+      font-size: 16px;
+      width: 300px;
+      max-width: 100%;
+    }
+    .search-button {
+      background-color: #08d13a;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .search-button:hover {
+      background-color: #7f8b8b;
+    }
   </style>
 </head>
 <body>
@@ -74,23 +96,32 @@
   </header>
 
   <div class="container">
+    <div class="search-bar">
+      <input class="search-input" type="text" id="searchInput" placeholder="Search">
+      <button class="search-button" onclick="searchApps()">Search</button>
+    </div>
       
-    <div class="app">
-      <img class="app-image" src="apps/GibbonGang.png" alt="Gibbon-Gang">
-      <h3>Gibbon Gang</h3>
-      <p>Welcome to Gibbon Gang. A social VR game. Play as a Gibbon, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, Hang out with friends,  and climb around.      </p>
-      <button class="download-button"><a href="https://drive.google.com/file/d/1dkxcSAnGlLsWd5qq_oJFVgeagqEQkK2M/view?usp=sharing">Download</a></button>
-    </div>
+    <div class="app-container">
+      <div class="app">
+        <img class="app-image" src="apps/GibbonGang.png" alt="Gibbon-Gang">
+        <h3>Gibbon Gang</h3>
+        <p>Welcome to Gibbon Gang. A social VR game. Play as a Gibbon, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.</p>
+        <button class="download-button"><a href="https://drive.google.com/file/d/1dkxcSAnGlLsWd5qq_oJFVgeagqEQkK2M/view?usp=sharing">Download</a></button>
+      </div>
 
-    <div class="app">
-      <img class="app-image" src="apps/Mandrills.PNG" alt="Mandrills">
-      <h3>Mandrills</h3>
-      <p>Welcome to Gibbon Gang. A social VR game. Play as a Gibbon, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, Hang out with friends,  and climb around.      </p>
-      <button class="download-button"><a href="https://www.mediafire.com/file/g25066pvahwnrrc/Mandrills-3.apk/file">Download</a></button>
-    </div>
+      <div class="app">
+        <img class="app-image" src="apps/Mandrills.PNG" alt="Mandrills">
+        <h3>Mandrills</h3>
+        <p>Welcome to Mandrills. A social VR game. Play as a Mandrill, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.</p>
+        <button class="download-button"><a href="https://www.mediafire.com/file/g25066pvahwnrrc/Mandrills-3.apk/file">Download</a></button>
+      </div>
 
-
-
+      <div class="app">
+        <img class="app-image" src="apps/Bad_Tag.png" alt="Mandrills">
+        <h3>Bad Tag</h3>
+        <p>Bad Tag is a fun VR game for anybody to play. The premise of the game is to chill, and have fun with friends or completely random people! Wear different cosmetics, jump around the map, attempt to get as high as possible on the map, and stay tuned for the many updates to come! Whatever you want to do, you do.</p>
+        <button class="download-button"><a href="https://www.oculus.com/experiences/quest/6538647492820733/">Download</a></button>
+      </div>
 
     </div>
   </div>
@@ -100,5 +131,21 @@
       &copy; 2023 RevixLab Experiences. All rights reserved.
     </div>
   </footer>
+
+  <script>
+    function searchApps() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const appContainers = document.getElementsByClassName('app-container')[0].getElementsByClassName('app');
+
+      for (let i = 0; i < appContainers.length; i++) {
+        const appTitle = appContainers[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+        if (appTitle.includes(searchInput)) {
+          appContainers[i].style.display = 'block';
+        } else {
+          appContainers[i].style.display = 'none';
+        }
+      }
+    }
+  </script>
 </body>
 </html>
