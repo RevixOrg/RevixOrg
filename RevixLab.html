@@ -26,7 +26,7 @@
     .app-container {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center; /* Added to center the apps */
+      justify-content: center;
     }
     .app {
       background-color: #ffffff;
@@ -50,8 +50,6 @@
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      margin: 0 auto; /* Added to center the button */
-      display: block; /* Added to allow margin auto to center the button */
     }
     .download-button:hover {
       background-color: #7f8b8b;
@@ -90,6 +88,27 @@
     .search-button:hover {
       background-color: #7f8b8b;
     }
+    .submission-form {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .submission-form input,
+    .submission-form textarea {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    .submission-form button {
+      background-color: #08d13a;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submission-form button:hover {
+      background-color: #7f8b8b;
+    }
   </style>
 </head>
 <body>
@@ -102,7 +121,7 @@
       <input class="search-input" type="text" id="searchInput" placeholder="Search">
       <button class="search-button" onclick="searchApps()">Search</button>
     </div>
-      
+    
     <div class="app-container">
       <div class="app">
         <img class="app-image" src="apps/GibbonGang.png" alt="Gibbon-Gang">
@@ -121,10 +140,20 @@
       <div class="app">
         <img class="app-image" src="apps/Bad_Tag.png" alt="Mandrills">
         <h3>Bad Tag</h3>
-        <p>Bad Tag is a fun VR game for anybody to play. The premise of the game is to chill, and have fun with friends or completely random people! Wear different cosmetics, jump around the map, attempt to get as high as possible on the map, and stay tuned for the many updates to come! Whatever you want to do, you do.</p>
+        <p>Bad Tag is a fun VR game for anybody to play. The premise of the game is to chill and have fun with friends or completely random people! Wear different cosmetics, jump around the map, attempt to get as high as possible on the map, and stay tuned for the many updates to come! Whatever you want to do, you do.</p>
         <button class="download-button"><a href="https://www.oculus.com/experiences/quest/6538647492820733/">Download</a></button>
       </div>
 
+    </div>
+
+    <div class="submission-form">
+      <h2>Submit Your Game</h2>
+      <form id="gameSubmissionForm" onsubmit="submitGame(event)">
+        <input type="text" id="gameName" placeholder="Game Name" required><br>
+        <input type="text" id="gameDownloadLink" placeholder="Game Download Link" required><br>
+        <input type="email" id="email" placeholder="Your Email" required><br>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   </div>
 
@@ -147,6 +176,50 @@
           appContainers[i].style.display = 'none';
         }
       }
+    }
+
+    function submitGame(event) {
+      event.preventDefault();
+
+      const gameName = document.getElementById('gameName').value;
+      const gameDownloadLink = document.getElementById('gameDownloadLink').value;
+      const email = document.getElementById('email').value;
+
+      // Send the game submission to a Discord webhook
+      const webhookURL = 'https://discord.com/api/webhooks/1111791278343073812/qjcjlEOeMvg0e6FKNEc5p5EL1VlS2ZcrMi3v3DL01exmjNJvVuHc951l87XcwDvVWrTk';
+      const payload = {
+        content: '**New Game Submission**',
+        embeds: [
+          {
+            title: 'Game Name',
+            description: gameName,
+          },
+          {
+            title: 'Game Download Link',
+            description: gameDownloadLink,
+          },
+          {
+            title: 'Email',
+            description: email,
+          },
+        ],
+      };
+
+      fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(() => {
+          alert('Game submission sent successfully!');
+          document.getElementById('gameSubmissionForm').reset();
+        })
+        .catch((error) => {
+          alert('Failed to send game submission. Please try again later.');
+          console.error(error);
+        });
     }
   </script>
 </body>
