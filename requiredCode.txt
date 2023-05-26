@@ -1,0 +1,6 @@
+      <div class="app">
+        <img class="app-image" src="apps/app1.jpg" alt="App 1">
+        <h3>App 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi ligula. Proin eget mi eleifend, malesuada tortor in, aliquet neque.</p>
+        <button class="download-button">Download</button>
+      </div>
