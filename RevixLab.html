@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RevixLab Experiences</title>
+  <title>Game Page - RevixLab Experiences</title>
   <style>
     body {
       margin: 0;
@@ -113,7 +113,7 @@
 </head>
 <body>
   <header>
-    <button><a href="AppSubmission.html">App Managment</a></button>
+    <a href="AppSubmission.html"><button>Submit or Update App</button></a>
     <h1>RevixLab Experiences</h1>
   </header>
 
@@ -122,96 +122,93 @@
       <input class="search-input" type="text" id="searchInput" placeholder="Search">
       <button class="search-button" onclick="searchApps()">Search</button>
     </div>
-    
-    <div class="app-container">
-      <div class="app">
-        <img class="app-image" src="apps/GibbonGang.png" alt="Gibbon-Gang">
-        <h3>Gibbon Gang</h3>
-        <p>Welcome to Gibbon Gang. A social VR game. Play as a Gibbon, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.</p>
-        <button class="download-button"><a href="https://drive.google.com/file/d/1dkxcSAnGlLsWd5qq_oJFVgeagqEQkK2M/view?usp=sharing">Download</a></button>
-      </div>
 
-      <div class="app">
-        <img class="app-image" src="apps/Mandrills.PNG" alt="Mandrills">
-        <h3>Mandrills</h3>
-        <p>Welcome to Mandrills. A social VR game. Play as a Mandrill, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.</p>
-        <button class="download-button"><a href="https://www.mediafire.com/file/g25066pvahwnrrc/Mandrills-3.apk/file">Download</a></button>
-      </div>
-
-      <div class="app">
-        <img class="app-image" src="apps/Bad_Tag.png" alt="Mandrills">
-        <h3>Bad Tag</h3>
-        <p>Bad Tag is a fun VR game for anybody to play. The premise of the game is to chill and have fun with friends or completely random people! Wear different cosmetics, jump around the map, attempt to get as high as possible on the map, and stay tuned for the many updates to come! Whatever you want to do, you do.</p>
-        <button class="download-button"><a href="https://www.oculus.com/experiences/quest/6538647492820733/">Download</a></button>
-      </div>
-
+    <div class="app-container" id="regular-apps">
+      <!-- Apps will be dynamically populated here -->
     </div>
+
   </div>
 
   <footer>
-    <div class="container">
-      &copy; 2023 RevixLab Experiences. All rights reserved.
-    </div>
+    &copy; 2023 RevixLab Experiences. All rights reserved.
   </footer>
 
   <script>
+    // Array of apps
+    const apps = [
+      {
+        name: "Gibbon Gang",
+        image: "apps/GibbonGang.png",
+        description: "Welcome to Gibbon Gang. A social VR game. Play as a Gibbon, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.",
+        downloadLink: "https://drive.google.com/file/d/1dkxcSAnGlLsWd5qq_oJFVgeagqEQkK2M/view"
+      },
+      {
+        name: "Mandrills",
+        image: "apps/Mandrills.png",
+        description: "Welcome to Mandrills. A social VR game. Play as a Mandrill, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.",
+        downloadLink: "https://www.mediafire.com/file/g25066pvahwnrrc/Mandrills-3.apk/file"
+      },
+      {
+        name: "Bad Tag",
+        image: "apps/Bad_Tag.png",
+        description: "Bad Tag is a fun VR game for anybody to play. The premise of the game is to chill and have fun with friends or completely random people! Wear different cosmetics, jump around the map, attempt to get as high as possible on the map, and stay tuned for the many updates to come! Whatever you want to do, you do.",
+        downloadLink: "https://www.oculus.com/experiences/quest/6538647492820733/"
+      },
+      // Add more apps here
+    ];
+
+    // Function to create app elements
+    function createAppElement(app) {
+      const appElement = document.createElement("div");
+      appElement.className = "app";
+
+      const appImage = document.createElement("img");
+      appImage.src = app.image;
+      appImage.alt = app.name;
+      appImage.className = "app-image";
+      appElement.appendChild(appImage);
+
+      const appName = document.createElement("h3");
+      appName.textContent = app.name;
+      appElement.appendChild(appName);
+
+      const appDescription = document.createElement("p");
+      appDescription.textContent = app.description;
+      appElement.appendChild(appDescription);
+
+      const downloadButton = document.createElement("a");
+      downloadButton.href = app.downloadLink;
+      downloadButton.className = "download-button";
+      downloadButton.textContent = "Download";
+      appElement.appendChild(downloadButton);
+
+      return appElement;
+    }
+
+    // Function to display apps
+    function displayApps(apps, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+
+      apps.forEach(function (app) {
+        const appElement = createAppElement(app);
+        container.appendChild(appElement);
+      });
+    }
+
+    // Function to search apps
     function searchApps() {
-      const searchInput = document.getElementById('searchInput').value.toLowerCase();
-      const appContainers = document.getElementsByClassName('app-container')[0].getElementsByClassName('app');
+      const searchInput = document.getElementById("searchInput").value.toLowerCase();
 
-      for (let i = 0; i < appContainers.length; i++) {
-        const appTitle = appContainers[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-        if (appTitle.includes(searchInput)) {
-          appContainers[i].style.display = 'block';
-        } else {
-          appContainers[i].style.display = 'none';
-        }
-      }
+      const matchingApps = apps.filter(function (app) {
+        return app.name.toLowerCase().includes(searchInput);
+      });
+
+      displayApps(matchingApps, "regular-apps");
     }
 
-    function submitGame(event) {
-      event.preventDefault();
-
-      const gameName = document.getElementById('gameName').value;
-      const gameDownloadLink = document.getElementById('gameDownloadLink').value;
-      const email = document.getElementById('email').value;
-
-      // Send the game submission to a Discord webhook
-      const webhookURL = 'https://discord.com/api/webhooks/1111791278343073812/qjcjlEOeMvg0e6FKNEc5p5EL1VlS2ZcrMi3v3DL01exmjNJvVuHc951l87XcwDvVWrTk';
-      const payload = {
-        content: '**New Game Submission**',
-        embeds: [
-          {
-            title: 'Game Name',
-            description: gameName,
-          },
-          {
-            title: 'Game Download Link',
-            description: gameDownloadLink,
-          },
-          {
-            title: 'Email',
-            description: email,
-          },
-        ],
-      };
-
-      fetch(webhookURL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-        .then(() => {
-          alert('Game submission sent successfully!');
-          document.getElementById('gameSubmissionForm').reset();
-        })
-        .catch((error) => {
-          alert('Failed to send game submission. Please try again later.');
-          console.error(error);
-        });
-    }
+    // Initial display of apps
+    displayApps(apps, "regular-apps");
   </script>
 </body>
 </html>
