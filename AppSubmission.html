@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>App Management - RevixLab Experiences</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+    header {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    .form-container h2 {
+      margin-top: 0;
+      color: #08d13a;
+      text-align: center;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .form-container input {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    .form-container textarea {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      height: 100px;
+    }
+    .form-container button {
+      background-color: #08d13a;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background-color: #7f8b8b;
+    }
+    footer {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>App Management - RevixLab Experiences</h1>
+  </header>
+
+  <div class="container">
+    <div class="form-container">
+      <h2>Upload or Update Your App</h2>
+      <form id="appForm" onsubmit="submitApp(event)">
+        <label for="appName">App Name</label>
+        <input type="text" id="appName" required>
+        
+        <label for="appDescription">App Description</label>
+        <textarea id="appDescription" required></textarea>
+        
+        <label for="appDownloadLink">App Download Link</label>
+        <input type="text" id="appDownloadLink" required>
+        
+        <label for="appEmail">Contact Email</label>
+        <input type="email" id="appEmail" required>
+        
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      &copy; 2023 RevixLab Experiences. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    function submitApp(event) {
+      event.preventDefault();
+
+      const appName = document.getElementById('appName').value;
+      const appDescription = document.getElementById('appDescription').value;
+      const appDownloadLink = document.getElementById('appDownloadLink').value;
+      const appEmail = document.getElementById('appEmail').value;
+
+      const webhookUrl = 'https://discord.com/api/webhooks/1111791278343073812/qjcjlEOeMvg0e6FKNEc5p5EL1VlS2ZcrMi3v3DL01exmjNJvVuHc951l87XcwDvVWrTk';
+      const payload = {
+        content: 'New App Submission',
+        embeds: [
+          {
+            title: appName,
+            description: appDescription,
+            fields: [
+              {
+                name: 'Download Link',
+                value: appDownloadLink,
+              },
+              {
+                name: 'Contact Email',
+                value: appEmail,
+              },
+            ],
+          },
+        ],
+      };
+
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+      .then(() => {
+        window.location.href = "AppSubmitted.html";
+        document.getElementById('appForm').reset();
+      })
+      .catch((error) => {
+        console.error('Error submitting app:', error);
+        // Handle error or display error message to the user
+      });
+    }
+  </script>
+</body>
+</html>
