@@ -159,14 +159,9 @@
       <button class="search-button" onclick="searchApps()">Search</button>
     </div>
 
-
     <div class="promoted-app-container" id="promoted-apps">
       <!-- Promoted apps will be dynamically populated here -->
     </div>
-
-    <header>
-      <h1>More apps!</h1>
-    </header>
 
     <div class="app-container" id="regular-apps">
       <!-- Regular apps will be dynamically populated here -->
@@ -182,18 +177,11 @@
     // Array of apps
     const apps = [
       {
-        name: "Promoted Apps",
-        image: "apps/GibbonGang.png",
-        description: "Promoted apps go here! You will only see this if there aren't any promoted apps",
-        downloadLink: "",
-        promoted: true
-      },
-      {
         name: "Gibbon Gang",
         image: "apps/GibbonGang.png",
         description: "Welcome to Gibbon Gang. A social VR game. Play as a Gibbon, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.",
         downloadLink: "https://drive.google.com/file/d/1dkxcSAnGlLsWd5qq_oJFVgeagqEQkK2M/view",
-        promoted: false
+        promoted: true
       },
       {
         name: "Mandrills",
@@ -207,7 +195,7 @@
         image: "apps/Bad_Tag.png",
         description: "Bad Tag is a fun VR game for anybody to play. The premise of the game is to chill and have fun with friends or completely random people! Wear different cosmetics, jump around the map, attempt to get as high as possible on the map, and stay tuned for the many updates to come! Whatever you want to do, you do.",
         downloadLink: "https://www.oculus.com/experiences/quest/6538647492820733/",
-        promoted: false
+        promoted: true
       },
       // Add more apps here
     ];
