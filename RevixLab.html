@@ -112,6 +112,39 @@
     .submission-form button:hover {
       background-color: #7f8b8b;
     }
+    .promoted-app-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .promoted-app {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 10px;
+      flex: 1 0 300px;
+      max-width: 300px;
+    }
+    .promoted-app h3 {
+      margin-top: 0;
+      color: #08d13a;
+    }
+    .promoted-app p {
+      margin-bottom: 10px;
+    }
+    .promoted-app .download-button {
+      background-color: #08d13a;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      align-self: center;
+      text-align: center;
+    }
+    .promoted-app .download-button:hover {
+      background-color: #7f8b8b;
+    }
   </style>
 </head>
 <body>
@@ -126,8 +159,17 @@
       <button class="search-button" onclick="searchApps()">Search</button>
     </div>
 
+
+    <div class="promoted-app-container" id="promoted-apps">
+      <!-- Promoted apps will be dynamically populated here -->
+    </div>
+
+    <header>
+      <h1>More apps!</h1>
+    </header>
+
     <div class="app-container" id="regular-apps">
-      <!-- Apps will be dynamically populated here -->
+      <!-- Regular apps will be dynamically populated here -->
     </div>
 
   </div>
@@ -140,22 +182,32 @@
     // Array of apps
     const apps = [
       {
+        name: "Promoted Apps",
+        image: "apps/GibbonGang.png",
+        description: "Promoted apps go here! You will only see this if there aren't any promoted apps",
+        downloadLink: "https://drive.google.com/file/d/1dkxcSAnGlLsWd5qq_oJFVgeagqEQkK2M/view",
+        promoted: true
+      },
+      {
         name: "Gibbon Gang",
         image: "apps/GibbonGang.png",
         description: "Welcome to Gibbon Gang. A social VR game. Play as a Gibbon, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.",
-        downloadLink: "https://drive.google.com/file/d/1dkxcSAnGlLsWd5qq_oJFVgeagqEQkK2M/view"
+        downloadLink: "https://drive.google.com/file/d/1dkxcSAnGlLsWd5qq_oJFVgeagqEQkK2M/view",
+        promoted: false
       },
       {
         name: "Mandrills",
         image: "apps/Mandrills.PNG",
         description: "Welcome to Mandrills. A social VR game. Play as a Mandrill, a type of monkey. This Game is a casual multiplayer experience. Shop for clothes, hang out with friends, and climb around.",
-        downloadLink: "https://www.mediafire.com/file/g25066pvahwnrrc/Mandrills-3.apk/file"
+        downloadLink: "https://www.mediafire.com/file/g25066pvahwnrrc/Mandrills-3.apk/file",
+        promoted: false
       },
       {
         name: "Bad Tag",
         image: "apps/Bad_Tag.png",
         description: "Bad Tag is a fun VR game for anybody to play. The premise of the game is to chill and have fun with friends or completely random people! Wear different cosmetics, jump around the map, attempt to get as high as possible on the map, and stay tuned for the many updates to come! Whatever you want to do, you do.",
-        downloadLink: "https://www.oculus.com/experiences/quest/6538647492820733/"
+        downloadLink: "https://www.oculus.com/experiences/quest/6538647492820733/",
+        promoted: false
       },
       // Add more apps here
     ];
@@ -163,7 +215,7 @@
     // Function to create app elements
     function createAppElement(app) {
       const appElement = document.createElement("div");
-      appElement.className = "app";
+      appElement.className = app.promoted ? "promoted-app" : "app";
 
       const appImage = document.createElement("img");
       appImage.src = app.image;
@@ -211,7 +263,8 @@
     }
 
     // Initial display of apps
-    displayApps(apps, "regular-apps");
+    displayApps(apps.filter(app => !app.promoted), "regular-apps");
+    displayApps(apps.filter(app => app.promoted), "promoted-apps");
   </script>
 </body>
 </html>
