@@ -1,91 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Revix ORG Home</title>
+  <title>Programming Portfolio</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
     }
     header {
-      background-color: #333333;
-      color: #ffffff;
+      background-color: #333;
+      color: #fff;
       padding: 20px;
       text-align: center;
     }
     h1 {
       margin: 0;
+      font-size: 28px;
     }
     .container {
       max-width: 960px;
       margin: 0 auto;
       padding: 20px;
     }
-    .hero {
-      background-color: #00afaf;
-      color: #ffffff;
-      padding: 40px;
+    .intro {
       text-align: center;
+      margin-bottom: 40px;
+    }
+    .profile-image {
+      display: block;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 0 auto;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .animated-image {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
       margin-bottom: 20px;
     }
-    .hero h2 {
-      margin: 0;
-      font-size: 32px;
-    }
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 0;
-    }
-    .features {
+    .project-list {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     }
-    .feature {
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      padding: 20px;
+    .project {
+      width: 300px;
       margin: 10px;
-      width: 250px;
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .project h3 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+    .project p {
+      margin-bottom: 10px;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
       text-align: center;
     }
-    .feature h3 {
-      margin-top: 0;
-      color: #00afaf;
-    }
-    .footer {
-      background-color: #333333;
-      color: #ffffff;
-      padding: 20px;
+
+    .center-button {
       text-align: center;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to Revix ORG home</h1>
+    <h1>My Programming Portfolio</h1>
   </header>
 
   <div class="container">
-    <section class="hero">
-      <h2>Take a look at our projects</h2>
-    </section>
+    <div class="intro">
+      <img src="profile.jpg" alt="Profile Image" class="profile-image">
+      <h2>Welcome to my portfolio website!</h2>
+      <p>Check out my projects and skills below.</p>
+    </div>
 
-    <section class="features">
-      <div class="feature">
-        <h3><a href="RevixLab.html">RevixLab</a></h3>
-        <p>Is your meta quest vr game no longer able to be on applab? Use RevixLab!.</p>
+    <div class="project-list">
+      <div class="project">
+        <h3>RevixLab</h3>
+        <p>An Applab Clone</p>
+        <a href="RevixLab.html"></a><button class="center-button">Learn More</button></a>
       </div>
-
-    </section>
+      <!-- Add more project entries as needed -->
+    </div>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-      &copy; 2023 RevixOrg. All rights reserved.
-    </div>
+  <footer>
+    &copy; 2023 My Programming Portfolio. All rights reserved.
   </footer>
 </body>
 </html>
